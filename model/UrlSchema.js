@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 const { customAlphabet } = require("nanoid");
 
 // Unique Identifier
@@ -9,6 +10,12 @@ const UrlSchema = new mongoose.Schema({
   fullUrl: {
     type: String,
     required: true,
+    validate: (value) =>
+      validator.isURL(value, {
+        require_protocol: true,
+      }),
+    message:
+      "Please ensure the url is correct and includes the http(s) protocol",
   },
   shortUrl: {
     type: String,
