@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
-const nanoId = require("nanoid");
+const { customAlphabet } = require("nanoid");
+
+// Unique Identifier
+const alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const nanoId = customAlphabet(alphabet, 8);
 
 const UrlSchema = new mongoose.Schema({
   fullUrl: {
@@ -9,7 +13,12 @@ const UrlSchema = new mongoose.Schema({
   shortUrl: {
     type: String,
     required: true,
-    default: () => nanoId(5),
+    unique: true,
+    default: nanoId,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
   },
 });
 
