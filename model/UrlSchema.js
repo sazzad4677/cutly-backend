@@ -9,7 +9,7 @@ const nanoId = customAlphabet(alphabet, 8);
 const UrlSchema = new mongoose.Schema({
   fullUrl: {
     type: String,
-    required: true,
+    required: [true, "URL in Required"],
     validate: [
       (value) =>
         validator.isURL(value, {
@@ -30,4 +30,4 @@ const UrlSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("urlSchema", UrlSchema);
+module.exports = mongoose.model("URL", UrlSchema);
